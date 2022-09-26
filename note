@@ -1,0 +1,21 @@
+Sign up 
+form : id : regForm;
+First Name : id : firstName / name : first_name
+Second Name : id : secondName / name : second_name
+Third Name : id : thirdName / name : third_name
+Last Name : id : lastName / name : last_name
+Email : id : registerEmail / name : register_email
+Phone Number : id : telNum / name : tel_num
+Birthday : id : dobReg / name : dob_reg
+Password : id : registerPassword / name : register_password
+Repeat password : id : registerRepeatPassword / name : register_repeat_password
+Sign up : id : registerBtn / name : register_btn
+# ----------------------------------------
+Sign in
+form : id : signForm
+Email : id : loginName / name : login_name
+Password : id : loginPassword / name : login_password
+Sign in : id : ?????? didn't do it
+
+# include "../classes/signup.classes.php";
+# include "../classes/signup-contr.classes.php";
