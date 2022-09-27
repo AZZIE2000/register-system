@@ -2,6 +2,7 @@
 class Login extends Dbh
 {
     public $location;
+    public $err;
     protected $admin;
 
     protected function getUser($email, $password)
@@ -13,15 +14,17 @@ class Login extends Dbh
             $stmt = null;
             // header("location: ../welcome.php?error=stmtfailed");
             $this->location = "welcome.php?error=stmtfailed";
-            return "stmtfailed";
+            // exit();
+            return;
         }
 
 
         if ($stmt->rowCount() == 0) {
             $stmt = null;
             // header("location: ../welcome.php?error=usernotfound");
-            $this->location = "welcome.php?error=usernotfound";
-            return "usernotfound";
+            $this->err = "email not found";
+            // exit();
+            return;
         }
 
         $userInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -30,8 +33,9 @@ class Login extends Dbh
         if ($checkPwd == false) {
             $stmt = null;
             // header("location: ../welcome.php?error=wrongpassword");
-            $this->location = "welcome.php?error=wrongpassword";
-            return "wrongpassword";
+            $this->err = "wrong password";
+            // exit();
+            return;
         } else {
 
 
@@ -42,28 +46,28 @@ class Login extends Dbh
             if (!$stmt1->execute(array($email))) {
                 $stmt1 = null;
                 // header("location: ../welcome.php?error=stmtfailed");
-                // $this->location = "welcome.php?error=stmtfailed";
-                return "stmtfailed";
+                $this->location = "welcome.php?error=stmtfailed";
+                // exit();
+                return;
             }
 
 
             $stmt1 = null;
 
-            // if ($userInfo[0]['role'] == 'admin') {
-            //     $this->admin = true;
-            // } else {
-            //     $this->admin = false;
-            // }
+            if ($userInfo[0]['role'] == 'admin') {
+                $this->admin = true;
+            } else {
+                $this->admin = false;
+            }
 
-            // session_start();
-            // $_SESSION['email'] = $userInfo[0]['email'];
+            session_start();
+            $_SESSION['email'] = $userInfo[0]['email'];
 
             $stmt = null;
         }
 
 
         $stmt = null;
-        return true;
     }
     // -----------------------------------------------------
     // protected function checkLoginData($email)
@@ -128,5 +132,4 @@ class Login extends Dbh
     //     $stmt = null;
     //     return $result;
     // }
-
 }

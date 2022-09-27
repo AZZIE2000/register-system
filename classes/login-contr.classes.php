@@ -13,19 +13,15 @@ class loginContr extends Login
 
     public function loginUser()
     {
-        if ($this->getUser($this->email, $this->password)) {
-            return true;
+
+        $this->getUser($this->email, $this->password);
+
+        if ($this->admin) {
+            $this->location = "admin.php";
         } else {
-            return false;
+
+            $this->location = "home.html";
         }
-
-
-        // if ($this->admin) {
-        //     $this->location = "admin.php";
-        // } else {
-
-        //     $this->location = "welcome.php";
-        // }
     }
     // ----------------------------------
     // private $email;

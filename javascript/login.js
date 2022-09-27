@@ -11,15 +11,15 @@ formLog.addEventListener("submit", (e) => {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     },
-    body: `email="${email.value.trim()}"&pass="${pass.value.trim()}"`,
+    body: `email=${email.value}&pass=${pass.value}`,
   })
     .then((response) => response.text())
 
     .then((res) => {
-      if (res == "home.html") {
-        location.href = `http://localhost/register-system/${res}`;
+      if (res == "home.html" || res == "admin.php") {
+        location.href = res;
       } else {
-        taken.innerHTML = res;
+        alert(res);
       }
     });
 });

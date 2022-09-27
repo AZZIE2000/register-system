@@ -10,9 +10,18 @@ include "../classes/login-contr.classes.php";
 $emailreg = $_POST["email"];
 $passreg = $_POST["pass"];
 // echo $emailreg;
-$login = new loginContr($emailreg, $passreg);
-$login->loginUser();
-echo $login->loginUser();
+$logina = new loginContr($emailreg, $passreg);
+$logina->loginUser();
+if ($logina->err) {
+    echo $logina->err;
+} else {
+
+    // Send the user to welcome page
+    // use echo to send it as a response to js
+
+    echo $logina->location;
+}
+// echo $login->loginUser();
 // if (!$login->loginUser()) {
 //     echo "Email or Password is not correct";
 // } else {
